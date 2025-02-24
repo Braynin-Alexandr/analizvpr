@@ -1,0 +1,48 @@
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<canvas id="myChart"></canvas>
+<style>
+    #myChart {
+        width: 400px;
+        height: 300px;
+    }
+</style>
+<script>
+    const quarterGrades = {{ chart_data.quarter_grades|safe }};
+    const examGrades = {{ chart_data.exam_grades|safe }};
+
+    const ctx = document.getElementById('myChart').getContext('2d');
+
+    const myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Оценка "2"', 'Оценка "3"', 'Оценка "4"', 'Оценка "5"'],
+            datasets: [
+                {
+                    label: 'Оценки за 3-ю четверть',
+                    data: quarterGrades,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Оценки за экзамен',
+                    data: examGrades,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 1  // Отображать только целые числа
+                    }
+                }
+            }
+        }
+    });
+</script>

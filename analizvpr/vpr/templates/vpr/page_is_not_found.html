@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<body class="d-flex justify-content-center align-items-center vh-100">
+    <div class="text-center">
+        <h1 class="display-1 fw-bold text-body-emphasis mb-2">404</h1>
+        <h2 class="display-3">Страница не найдена</h2>
+        <p class="lead"> Похоже, запрашиваемая страница не существует.<br>
+        Возможно, она была удалена или вы допустили опечатку в адресе.</p>
+        <a href="{% url 'landing:landing' %}" class="btn btn-primary">Вернуться в начало</a>
+    </div>
+</body>
+{% endblock %}

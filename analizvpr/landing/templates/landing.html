@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container col-xxl-8 px-4 py-5">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+        <div class="col-10 col-sm-8 col-lg-6">
+            <img src="{% static 'images/landing_pic.jpg' %}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="500" height="300" loading="lazy">
+        </div>
+        <div class="col-lg-6">
+            <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Анализ результатов ВПР для учителей</h1>
+            <p class="lead">
+                Наш сайт предоставляет удобный и эффективный инструмент для анализа результатов
+                ВПР в школах. Мы помогаем педагогам быстро и точно оценивать знания учеников, выявлять слабые места и
+                отслеживать прогресс в обучении. Все данные собраны в одном месте и представлены в виде простых для
+                восприятия графиков и таблиц, что позволяет принимать обоснованные решения для улучшения образовательного
+                процесса.
+            </p>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                <a href="{% url 'vpr:about' %}" type="button" class="btn btn-outline-secondary btn-lg px-4">О сайте</a>
+                <a href="{% url 'vpr:grade_and_exam_settings' %}" type="button" class="btn btn-primary btn-lg px-4 me-md-2">Начать</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

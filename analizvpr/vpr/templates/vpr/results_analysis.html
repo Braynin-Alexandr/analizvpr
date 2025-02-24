@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block content %}
+
+ <!-- Header Section -->
+        <div class="container text-center" style="padding-top: 80px;">
+          <h2>{{ Title }}</h2>
+        </div>
+
+<div class="container mt-5" style="max-width: 50%;">
+
+    <!-- Marks Table -->
+    <h2 class="mb-4">Оценки</h2>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Показатель</th>
+                <th scope="col">3-я четверть</th>
+                <th scope="col">Экзамен</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for marks in table_marks %}
+                <tr>
+                    <td><strong>{{ marks.name }}<strong></td>
+                    <td>{{ marks.quarter }}</td>
+                    <td>{{ marks.exam }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2 class="mb-4">Список учеников</h2>
+    <!-- Students Table -->
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">№</th>
+                <th scope="col">Ученик</th>
+                <th scope="col">Оценка</th>
+                <th scope="col">Баллы</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in table_students %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ student.student_name }}</td>
+                    <td>{{ student.exam_mark }}</td>
+                    <td>{{ student.exam_points }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Chart -->
+        <h3 class="mt-5">График сравнения оценок за 3-ю четверть и ВПР</h3>
+    {% include 'vpr/chart/grades_comparison_chart.html' %}
+
+    <!-- Basic metrics -->
+    <h3 class="mt-5">Основные показатели</h3>
+    <ul class="list-group" style="padding-bottom: 40px;">
+        {% for name, value in other_data.items %}
+            <li><strong>{{ name }}: </strong> {{ value }}</li>
+        {% endfor %}
+    </ul>
+
+<h2 class="mb-4">Самые распространенные ошибки</h2>
+<!-- Popular mistakes Table -->
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">№</th>
+        <th scope="col">Задания</th>
+        <th scope="col">Количество учеников / процент учеников, <br> которые допустили ошибку</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for task, mistakes in popular_mistakes.items %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ task }}</td>
+        <td>{{ mistakes }} </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'vpr:grade_and_exam_settings' %}" class="btn btn-primary" style="margin-top: 20px; margin-bottom: 20px; float: left;">Начать заново</a>
+</div>
+{% endblock %}

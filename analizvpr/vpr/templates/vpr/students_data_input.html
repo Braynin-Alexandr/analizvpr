@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+
+        <!-- Header Section -->
+        <div class="container text-center" style="padding-top: 80px; padding-bottom: 60px;">
+          <h2>{{ Title }}</h2>
+            <p class="lead">Укажите имя ученика (по желанию), отметьте его присутствие,
+                введите оценку за 3-ю четверть (от 2 до 5) и заполните баллы за каждое задание (от 0 до 2).</p>
+        </div>
+
+<!-- Table Section -->
+<form method="post" >
+    {% csrf_token %}
+    {{ formset.management_form }}
+    <table class="table table-striped table-sm table-responsive" >
+        <thead>
+            <tr>
+                <th> № </th>
+                {% for field in formset.forms.0 %}
+                        <th> {{ field.label }} </th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for form in formset %}
+                {{ form.non_field_errors }}
+                <tr>
+                    <td> {{ forloop.counter }} </td>
+                    {% for field in form %}
+                        <td>
+                            {{ field }}
+                            {% if field.errors %}
+                                <div class="alert alert-danger">
+                                {% for error in field.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+            <button type="submit" class="btn btn-primary" style="margin-top: 10px; margin-bottom: 20px; float: left;">Получить результат</button>
+</form>
+</div>
+{% endblock %}
